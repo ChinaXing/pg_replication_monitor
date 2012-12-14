@@ -16,16 +16,16 @@ function error_report
 
 function get_status
 {
-    sent_location=$($PSQL -U $MASTER_USER -t \
+    sent_location=$($PSQL -U $MASTER_USER -t -d postgres \
         -c "SELECT sent_location from pg_stat_replication" \
         -h$MASTER_ADDRESS -p$MASTER_PORT)
-    pg_current_xlog_location=$($PSQL -U $MASTER_USER -t \
+    pg_current_xlog_location=$($PSQL -U $MASTER_USER -t -d postgres \
         -c "SELECT pg_current_xlog_location()" \
         -h$MASTER_ADDRESS -p$MASTER_PORT)
-    pg_last_xlog_receive_location=$($PSQL -U $SLAVE_USER -t \
+    pg_last_xlog_receive_location=$($PSQL -U $SLAVE_USER -t -d postgres \
         -c "SELECT pg_last_xlog_receive_location()" \
         -h$SLAVE_ADDRESS -p$SLAVE_PORT)
-    pg_last_xlog_replay_location=$($PSQL -U $SLAVE_USER -t \
+    pg_last_xlog_replay_location=$($PSQL -U $SLAVE_USER -t -d postgres \
         -c "SELECT pg_last_xlog_replay_location()" \
         -h$SLAVE_ADDRESS -p$SLAVE_PORT)
 
