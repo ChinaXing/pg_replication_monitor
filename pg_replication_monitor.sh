@@ -1,5 +1,5 @@
 #!/usr/bin/env bash 
-set -x
+#set -x
 ############################################################
 #Author    : ChinaXing - chen.yack@gmail.com
 #Create    : 2012-12-14 17:16
@@ -133,8 +133,8 @@ function parse_args
 
     if [ -n "$LOG" ]
     then
-        exec > $LOG
-        exec 2 > $LOG
+        exec >$LOG
+        exec 2>$LOG
     fi
 }
 
