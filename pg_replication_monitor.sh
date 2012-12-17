@@ -1,5 +1,5 @@
 #!/usr/bin/env bash 
-#set -x
+set -x
 ############################################################
 #Author    : ChinaXing - chen.yack@gmail.com
 #Create    : 2012-12-14 17:16
@@ -55,13 +55,13 @@ function get_status
 
 function check
 {
-  let sent_receive_lag=16#$sent_location-16#$pg_last_xlog_receive_location
+  let send_receive_lag=16#$sent_location-16#$pg_last_xlog_receive_location
   let current_sent_lag=16#$pg_current_xlog_location-16#$sent_location
   let replay_receive_lag=16#$pg_last_xlog_replay_location-16#$pg_last_xlog_receive_location
 
   if [ -n "$DEBUG" ]
   then
-      echo send_receive_lag:$sent_receive_lag
+      echo send_receive_lag:$send_receive_lag
       echo current_sent_lag:$current_sent_lag 
       echo replay_receive_lag:$replay_receive_lag
   fi
@@ -69,6 +69,7 @@ function check
 
 function report
 {
+
     if [ $send_receive_lag -gt $SEND_RECEIVE_LAG_MAX ]
     then
         error_report "WARN" "SEND_RECEIVE_LAG -gt $SEND_RECEIVE_LAG_MAX : $send_receive_lag"
